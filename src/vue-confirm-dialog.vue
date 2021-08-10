@@ -17,7 +17,7 @@
                 v-model="password"
                 @keyup.13="e => handleClickButton(e, true)"
                 class="vc-input"
-                type="password"
+                :type="dialog.inputType"
                 name="vc-password"
                 placeholder="Password"
                 autocomplete="off"
@@ -71,7 +71,8 @@ const Component = {
         auth: false,
         title: '',
         message: '',
-        button: {}
+        button: {},
+        inputType: 'text',
       },
       params: {}
     }
@@ -83,6 +84,7 @@ const Component = {
         auth: false,
         title: '',
         message: '',
+        inputType: 'text',
         button: {},
         callback: () => {}
       }
@@ -216,12 +218,15 @@ export default Component
 }
 .vc-container {
   background-color: var(--base-background-color);
-  border-radius: 1rem;
   width: 286px;
   height: auto;
   display: grid;
   grid-template-rows: 1fr max-content;
-  box-shadow: var(--container-box-shadow);
+
+  background-clip: padding-box;
+  border: 0 solid transparent;
+  border-radius: 0;
+  box-shadow: 0 0.5rem 1rem rgb(0, 0, 0);
 }
 .vc-text-grid {
   padding: 1rem;
@@ -261,20 +266,29 @@ export default Component
   border-radius: 0;
   border-right: 1px solid var(--button-border-color);
 }
-.vc-input[type='password'] {
-  width: 100%;
+.vc-input {
   outline: none;
-  border-radius: 8px;
-  height: 35px;
-  border: 0;
   margin: 5px 0;
-  background-color: var(--input-background-color);
-  padding: 0 0.5rem;
-  font-size: var(--font-size-m);
-  transition: 0.21s ease;
+
+
+  background-color: #F7F7F7;
+  display: block;
+  width: 100%;
+  height: calc(3.42rem + 2px);
+  padding: 0.8rem 1.7rem;
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: 1.3;
+  color: #545454;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.4rem;
+  box-shadow: none;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
-.vc-input[type='password']:hover,
-.vc-input[type='password']:focus {
+
+.vc-input:hover,
+.vc-input:focus {
   background-color: var(--input-background-color-hover);
 }
 
